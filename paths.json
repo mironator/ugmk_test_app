@@ -9,7 +9,8 @@
       "@localStorage/*": ["./src/localStorage/*"],
       "@models/*": ["./src/models/*"],
       "@pages/*": ["./src/pages/*"],
-      "@router/*": ["./src/router/*"]
+      "@router/*": ["./src/router/*"],
+      "@tools/*": ["./src/tools/*"]
     }
   }
 }

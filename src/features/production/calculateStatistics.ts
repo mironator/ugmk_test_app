@@ -1,7 +1,7 @@
 import { FactoryID, FactoryKey } from "@enums/factory";
 import { ProductID } from "@enums/product";
+import { ProductionByMonth } from "@tools/mapProductionByMonths";
 import { calculateProductsAmount } from "./calculateProductsAmount";
-import { ProductionByMonth } from "./mapProductionByMonths";
 
 export type StatisticsElement = {
   month: string;

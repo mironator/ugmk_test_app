@@ -4,13 +4,15 @@ import { ProductID } from "@enums/product";
 import { useWindowDimensions } from "@features/dimensions";
 import { DayProduction } from "@models/dayProduction";
 import { formatRoute } from "@router/formatRoute";
+import { calculateChartDimensions } from "@tools/calculateChartDimensions";
+import { capitalizeFirstLetter } from "@tools/capitalizeFirstLetter";
+import { mapProductionByMonths } from "@tools/mapProductionByMonths";
 import dayjs from "dayjs";
 import React, { useCallback, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { Bar, BarChart, Legend, XAxis, YAxis } from "recharts";
-import { calculateChartDimensions } from "./calculateChartDimensions";
 import { StatisticsElement, calculateStatistics } from "./calculateStatistics";
-import { mapProductionByMonths } from "./mapProductionByMonths";
+import styles from "./ProductionByMonthsChart.module.css";
 
 type PropsType = {
   production: DayProduction[];
@@ -24,6 +26,10 @@ export const ProductionByMonthsChart: React.FC<PropsType> = ({
   const navigate = useNavigate();
   const windowDimensions = useWindowDimensions();
 
+  const chartDimensions = useMemo(() => {
+    return calculateChartDimensions(windowDimensions.width);
+  }, [windowDimensions]);
+
   const statistics = useMemo(() => {
     const productionByMonth = mapProductionByMonths(production);
 
@@ -35,14 +41,10 @@ export const ProductionByMonthsChart: React.FC<PropsType> = ({
     return calculatedStatistics;
   }, [production, selectedProductId]);
 
-  const chartDimensions = useMemo(() => {
-    return calculateChartDimensions(windowDimensions.width);
-  }, [windowDimensions]);
-
   const legendFormatter = useCallback((value: string) => {
     const month = dayjs(value, "YYYY-MM").locale("ru");
 
-    return month.format("MMM").slice(0, 3);
+    return capitalizeFirstLetter(month.format("MMM").slice(0, 3));
   }, []);
 
   const onBarClick = useCallback(
@@ -52,7 +54,7 @@ export const ProductionByMonthsChart: React.FC<PropsType> = ({
       navigate(
         formatRoute(Routes.details, {
           factoryId,
-          monthNum: month.month() + 1,
+          month: month.month() + 1,
         }),
       );
     },
@@ -77,12 +79,14 @@ export const ProductionByMonthsChart: React.FC<PropsType> = ({
           fill="red"
           name="Фабрика А"
           onClick={(data) => onBarClick(FactoryID.FACTORY_1, data)}
+          className={styles.bar}
         />
         <Bar
           dataKey={FactoryKey.FACTORY_2}
           fill="blue"
           name="Фабрика Б"
           onClick={(data) => onBarClick(FactoryID.FACTORY_2, data)}
+          className={styles.bar}
         />
       </BarChart>
     </div>

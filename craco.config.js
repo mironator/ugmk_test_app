@@ -11,6 +11,7 @@ module.exports = {
       "@models": path.resolve(__dirname, "./src/models"),
       "@pages": path.resolve(__dirname, "./src/pages"),
       "@router": path.resolve(__dirname, "./src/router"),
+      "@tools": path.resolve(__dirname, "./src/tools"),
     },
   },
 };

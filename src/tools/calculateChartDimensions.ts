@@ -3,9 +3,11 @@ type ReturnType = {
   height: number;
 };
 
-export function calculateChartDimensions(screenWidth: number): ReturnType {
+export function calculateChartDimensions(
+  screenWidth: number,
+  height = 300,
+): ReturnType {
   let width = 600;
-  const height = 300;
 
   if (screenWidth > 650) {
     width = 600;

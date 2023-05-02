@@ -1,18 +1,30 @@
 import { getProduction } from "@api/products";
+import { DetailsChart, DetailsHeader } from "@features/details";
 import { CenteredLayout } from "@features/layout";
 import { DayProduction } from "@models/dayProduction";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
 
 type PropsType = {
   factoryId?: string;
-  monthNum?: string;
+  month?: string;
 };
 
 export const DetailsPage: React.FC = () => {
-  const { factoryId, monthNum } = useParams<PropsType>();
+  const { factoryId, month } = useParams<PropsType>();
 
   const [production, setProduction] = useState<DayProduction[]>([]);
+
+  const [factoryIdNum, monthNum] = useMemo(() => {
+    const factoryIdParsed = Number.parseInt(factoryId || "", 10);
+    const monthParsed = Number.parseInt(month || "", 10);
+
+    if (Number.isNaN(factoryIdParsed) || Number.isNaN(monthParsed)) {
+      throw new Error("Неверные параметры");
+    }
+
+    return [factoryIdParsed, monthParsed];
+  }, []);
 
   useEffect(() => {
     (async () => {
@@ -28,10 +40,12 @@ export const DetailsPage: React.FC = () => {
 
   return (
     <CenteredLayout>
-      <div>
-        {factoryId} - {monthNum}
-      </div>
-      <div>DetailsPage</div>
+      <DetailsHeader factoryId={factoryIdNum} monthNum={monthNum} />
+      <DetailsChart
+        factoryId={factoryIdNum}
+        monthNum={monthNum}
+        production={production}
+      />
     </CenteredLayout>
   );
 };
