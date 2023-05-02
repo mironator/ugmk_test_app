@@ -22,7 +22,9 @@
     "start": "craco start",
     "build": "craco build",
     "eject": "craco eject",
-    "test": "jest --watch"
+    "test": "jest --watch",
+    "dockerize": "docker build . -t ugmk_test_app",
+    "start-container": "docker run -p 3000:3000 -d --rm --name ugmk_test_app ugmk_test_app"
   },
   "eslintConfig": {
     "extends": [
