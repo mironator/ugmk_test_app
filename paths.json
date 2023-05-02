@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@api/*": ["./src/api/*"],
+      "@constants/*": ["./src/constants/*"],
+      "@enums/*": ["./src/enums/*"],
+      "@features/*": ["./src/features/*"],
+      "@localStorage/*": ["./src/localStorage/*"],
+      "@models/*": ["./src/models/*"],
+      "@pages/*": ["./src/pages/*"],
+      "@router/*": ["./src/router/*"]
+    }
+  }
+}

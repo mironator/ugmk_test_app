@@ -1,0 +1,18 @@
+.filterContainer {
+  margin-bottom: 20px;
+  padding: 16px;
+  display: flex;
+  justify-content: flex-end;
+
+  border: 2px solid;
+  border-radius: 8px;
+}
+
+.chartContainer {
+  padding: 16px;
+  display: flex;
+  justify-content: flex-end;
+
+  border: 2px solid;
+  border-radius: 8px;
+}
