@@ -28,4 +28,4 @@ Builds docker image.
 ### `npm run start-container`
 
 Runs docker image in a container. The image can be accessed via address http://localhost:3000.\
-The container will automatically destroyed on exit.
+The container will be automatically destroyed on exit.
