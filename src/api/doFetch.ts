@@ -13,11 +13,7 @@ export async function doFetch({
 }: PropsType): Promise<Response> {
   const response = await fetch(url, {
     method,
-    headers: {
-      Accept: "*/*",
-      "Content-Type": "application/json",
-      ...headers,
-    },
+    headers,
     body,
   });
 
