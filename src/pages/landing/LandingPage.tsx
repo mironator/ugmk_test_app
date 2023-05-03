@@ -1,14 +1,13 @@
-import { getProduction } from "@api/products";
 import { SELECTED_PRODUCT_ID } from "@constants/localStorage";
 import { ProductKey } from "@enums/product";
 import { CenteredLayout } from "@features/layout";
 import {
   ProductionByMonthsChart,
   ProductsByMonthsFilter,
+  useProduction,
 } from "@features/production";
 import { loadStorageValue } from "@localStorage/loadStorageValue";
 import { saveStorageValue } from "@localStorage/saveStorageValue";
-import { DayProduction } from "@models/dayProduction";
 import React, { useCallback, useEffect, useState } from "react";
 import styles from "./LandingPage.module.css";
 
@@ -16,7 +15,7 @@ export const LandingPage: React.FC = () => {
   const [selectedProductKey, setSelectedProductKey] = useState<
     ProductKey | undefined
   >(undefined);
-  const [production, setProduction] = useState<DayProduction[]>([]);
+  const production = useProduction();
 
   const onSelectedProductKeyChange = useCallback(
     (value: ProductKey | undefined) => {
@@ -27,16 +26,6 @@ export const LandingPage: React.FC = () => {
   );
 
   useEffect(() => {
-    (async () => {
-      try {
-        const receivedProduction = await getProduction();
-
-        setProduction(receivedProduction);
-      } catch (e) {
-        setProduction([]);
-      }
-    })();
-
     setSelectedProductKey(loadStorageValue(SELECTED_PRODUCT_ID));
   }, []);
 

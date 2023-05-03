@@ -1,8 +1,8 @@
-import { getProduction } from "@api/products";
+import { FactoryID } from "@enums/factory";
 import { DetailsChart, DetailsHeader } from "@features/details";
 import { CenteredLayout } from "@features/layout";
-import { DayProduction } from "@models/dayProduction";
-import React, { useEffect, useMemo, useState } from "react";
+import { useProduction } from "@features/production";
+import React, { useMemo } from "react";
 import { useParams } from "react-router-dom";
 
 type PropsType = {
@@ -13,7 +13,7 @@ type PropsType = {
 export const DetailsPage: React.FC = () => {
   const { factoryId, month } = useParams<PropsType>();
 
-  const [production, setProduction] = useState<DayProduction[]>([]);
+  const production = useProduction();
 
   const [factoryIdNum, monthNum] = useMemo(() => {
     const factoryIdParsed = Number.parseInt(factoryId || "", 10);
@@ -24,18 +24,6 @@ export const DetailsPage: React.FC = () => {
     }
 
     return [factoryIdParsed, monthParsed];
-  }, []);
-
-  useEffect(() => {
-    (async () => {
-      try {
-        const receivedProduction = await getProduction();
-
-        setProduction(receivedProduction);
-      } catch (e) {
-        setProduction([]);
-      }
-    })();
   }, []);
 
   return (
