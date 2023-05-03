@@ -12,13 +12,6 @@ type PropsType = {
   monthNum: number;
 };
 
-const data = [
-  { name: "Group A", value: 400 },
-  { name: "Group B", value: 300 },
-  { name: "Group C", value: 300 },
-  { name: "Group D", value: 200 },
-];
-
 const COLORS = ["green", "orange", "#FFBB28", "#FF8042", "#0088FE", "#00C49F"];
 
 export const DetailsChart: React.FC<PropsType> = ({
