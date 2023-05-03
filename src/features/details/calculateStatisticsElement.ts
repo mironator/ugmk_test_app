@@ -1,6 +1,6 @@
 import { FactoryID } from "@enums/factory";
-import { ProductID } from "@enums/product";
-import { getProductNameById } from "@tools/getProductName";
+import { ProductKey } from "@enums/product";
+import { getProductNameByKey } from "@tools/getProductName";
 import { ProductionByMonth } from "@tools/mapProductionByMonths";
 import dayjs from "dayjs";
 
@@ -13,10 +13,10 @@ export function calculateStatisticsElement(
   productionByMonth: ProductionByMonth,
   factoryId: FactoryID,
   monthNum: number,
-  productId: ProductID,
+  productKey: ProductKey,
 ): StatisticsElement {
   const statisticsElement: StatisticsElement = {
-    label: getProductNameById(productId),
+    label: getProductNameByKey(productKey),
     value: 0,
   };
 
@@ -31,7 +31,7 @@ export function calculateStatisticsElement(
 
       monthProduction.forEach((dayProduction) => {
         if (dayProduction.factory_id === factoryId) {
-          statisticsElement.value += Number(dayProduction[productId]);
+          statisticsElement.value += Number(dayProduction[productKey]);
         }
       });
     });

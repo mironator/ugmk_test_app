@@ -1,6 +1,6 @@
 import { Routes } from "@constants/routes";
 import { FactoryID, FactoryKey } from "@enums/factory";
-import { ProductID } from "@enums/product";
+import { ProductKey } from "@enums/product";
 import { useWindowDimensions } from "@features/dimensions";
 import { DayProduction } from "@models/dayProduction";
 import { formatRoute } from "@router/formatRoute";
@@ -11,17 +11,17 @@ import dayjs from "dayjs";
 import React, { useCallback, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { Bar, BarChart, Legend, XAxis, YAxis } from "recharts";
-import { StatisticsElement, calculateStatistics } from "./calculateStatistics";
 import styles from "./ProductionByMonthsChart.module.css";
+import { StatisticsElement, calculateStatistics } from "./calculateStatistics";
 
 type PropsType = {
   production: DayProduction[];
-  selectedProductId?: ProductID;
+  selectedProductKey?: ProductKey;
 };
 
 export const ProductionByMonthsChart: React.FC<PropsType> = ({
   production,
-  selectedProductId,
+  selectedProductKey,
 }) => {
   const navigate = useNavigate();
   const windowDimensions = useWindowDimensions();
@@ -35,11 +35,11 @@ export const ProductionByMonthsChart: React.FC<PropsType> = ({
 
     const calculatedStatistics = calculateStatistics(
       productionByMonth,
-      selectedProductId,
+      selectedProductKey,
     );
 
     return calculatedStatistics;
-  }, [production, selectedProductId]);
+  }, [production, selectedProductKey]);
 
   const legendFormatter = useCallback((value: string) => {
     const month = dayjs(value, "YYYY-MM").locale("ru");

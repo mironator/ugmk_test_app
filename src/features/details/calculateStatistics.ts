@@ -1,5 +1,5 @@
 import { FactoryID } from "@enums/factory";
-import { ProductID } from "@enums/product";
+import { ProductKey } from "@enums/product";
 import { ProductionByMonth } from "@tools/mapProductionByMonths";
 import {
   StatisticsElement,
@@ -18,7 +18,7 @@ export function calculateStatistics(
       productionByMonth,
       factoryId,
       monthNum,
-      ProductID.PRODUCT_1,
+      ProductKey.PRODUCT_1,
     ),
   );
 
@@ -27,7 +27,7 @@ export function calculateStatistics(
       productionByMonth,
       factoryId,
       monthNum,
-      ProductID.PRODUCT_2,
+      ProductKey.PRODUCT_2,
     ),
   );
   return statisticsElements;

@@ -1,18 +1,18 @@
-import { ProductID } from "@enums/product";
+import { ProductKey } from "@enums/product";
 import { DayProduction } from "@models/dayProduction";
 
 export function calculateProductsAmount(
   dayProduction: DayProduction,
-  selectedProductId?: ProductID,
+  selectedProductKey?: ProductKey,
 ): number {
-  if (!selectedProductId) {
+  if (!selectedProductKey) {
     return (
-      (Number(dayProduction[ProductID.PRODUCT_1]) +
-        Number(dayProduction[ProductID.PRODUCT_2]) +
-        Number(dayProduction[ProductID.PRODUCT_3])) /
+      (Number(dayProduction[ProductKey.PRODUCT_1]) +
+        Number(dayProduction[ProductKey.PRODUCT_2]) +
+        Number(dayProduction[ProductKey.PRODUCT_3])) /
       1000
     );
   }
 
-  return Number(dayProduction[selectedProductId]) / 1000;
+  return Number(dayProduction[selectedProductKey]) / 1000;
 }

@@ -1,5 +1,5 @@
 import { FactoryID, FactoryKey } from "@enums/factory";
-import { ProductID } from "@enums/product";
+import { ProductKey } from "@enums/product";
 import { ProductionByMonth } from "@tools/mapProductionByMonths";
 import { calculateProductsAmount } from "./calculateProductsAmount";
 
@@ -11,7 +11,7 @@ export type StatisticsElement = {
 
 export function calculateStatistics(
   productsByMonth: ProductionByMonth,
-  selectedProductId?: ProductID,
+  selectedProductKey?: ProductKey,
 ): StatisticsElement[] {
   const statistics: StatisticsElement[] = [];
 
@@ -27,7 +27,7 @@ export function calculateStatistics(
               ...acc,
               [FactoryKey.FACTORY_1]:
                 acc[FactoryKey.FACTORY_1] +
-                calculateProductsAmount(current, selectedProductId),
+                calculateProductsAmount(current, selectedProductKey),
             };
           }
 
@@ -36,7 +36,7 @@ export function calculateStatistics(
               ...acc,
               [FactoryKey.FACTORY_2]:
                 acc[FactoryKey.FACTORY_2] +
-                calculateProductsAmount(current, selectedProductId),
+                calculateProductsAmount(current, selectedProductKey),
             };
           }
 

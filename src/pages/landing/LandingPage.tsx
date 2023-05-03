@@ -1,6 +1,6 @@
 import { getProduction } from "@api/products";
 import { SELECTED_PRODUCT_ID } from "@constants/localStorage";
-import { ProductID } from "@enums/product";
+import { ProductKey } from "@enums/product";
 import { CenteredLayout } from "@features/layout";
 import {
   ProductionByMonthsChart,
@@ -13,14 +13,14 @@ import React, { useCallback, useEffect, useState } from "react";
 import styles from "./LandingPage.module.css";
 
 export const LandingPage: React.FC = () => {
-  const [selectedProductId, setSelectedProductId] = useState<
-    ProductID | undefined
+  const [selectedProductKey, setSelectedProductKey] = useState<
+    ProductKey | undefined
   >(undefined);
   const [production, setProduction] = useState<DayProduction[]>([]);
 
-  const onSelectedProductIdChange = useCallback(
-    (value: ProductID | undefined) => {
-      setSelectedProductId(value);
+  const onSelectedProductKeyChange = useCallback(
+    (value: ProductKey | undefined) => {
+      setSelectedProductKey(value);
       saveStorageValue(SELECTED_PRODUCT_ID, value);
     },
     [],
@@ -37,7 +37,7 @@ export const LandingPage: React.FC = () => {
       }
     })();
 
-    setSelectedProductId(loadStorageValue(SELECTED_PRODUCT_ID));
+    setSelectedProductKey(loadStorageValue(SELECTED_PRODUCT_ID));
   }, []);
 
   return (
@@ -45,14 +45,14 @@ export const LandingPage: React.FC = () => {
       <div>
         <div className={styles.filterContainer}>
           <ProductsByMonthsFilter
-            selectedProductId={selectedProductId}
-            onChange={onSelectedProductIdChange}
+            selectedProductKey={selectedProductKey}
+            onChange={onSelectedProductKeyChange}
           />
         </div>
         <div className={styles.chartContainer}>
           <ProductionByMonthsChart
             production={production}
-            selectedProductId={selectedProductId}
+            selectedProductKey={selectedProductKey}
           />
         </div>
       </div>
